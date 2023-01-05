@@ -209,8 +209,8 @@ function App() {
               </div>:""}
 
               <StripeCheckout
-                  name='stefanus shop'
-                  image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTieHDSnSrZDDryW9nYmcIfZ28BHQsVmHvnF7GEOQ2YEQ&s'
+                  name='Stefanus shop'
+                  image='https://media.licdn.com/dms/image/D5603AQH6hS0fiW31DQ/profile-displayphoto-shrink_800_800/0/1667669250980?e=1678320000&v=beta&t=eK5bPH9zxvUCDMe0HkMt1d94cf6NoawzoNmwK00B1nA'
                   billingAddress
                   shippingAddress
                   description={`Your total is $${isPromo? discount*totalprice: totalprice}`}
