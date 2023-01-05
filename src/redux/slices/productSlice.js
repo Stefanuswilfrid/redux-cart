@@ -4,21 +4,21 @@ export  const initialState = {
     products: [
         {
             "id" : 1,
-            "nama":"sepatu nike",
+            "nama":"Fifa 19",
             "quantity":1,
-            "img":"https://cdn.pixabay.com/photo/2013/07/13/14/08/apparel-162192_1280.png",
-            "size":"M",
-            "color":"blue",
+            "img":"https://pngimg.com/d/fifa_game_PNG79.png",
+            "category":"Game",
+            "detail":"PS4",
             "price":20,
 
         },
         {
             "id":2,
-            "nama":"adidas sepatu",
+            "nama":"Red V-neck Shirt",
             "img":"https://cdn.pixabay.com/photo/2013/07/13/14/08/apparel-162192_1280.png",
             "quantity":1,
-            "color":"red",
-            "size":"S",
+            "category":"Clothing",
+            "detail":"Size S",
             "price":30,
         }
     ],

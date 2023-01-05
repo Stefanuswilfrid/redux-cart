@@ -1,15 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  display:grid;
+  min-height:100vh;
+  place-items:center;
+  background:#DDDDDD;
 }
 
-.heading {
-  background-color:#eee;
-  padding:2rem;
-  margin-bottom:1rem;
-}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.shopping-cart{
+  background:white;
+}
+
+.order-summary {
+  background:#EEEEEE;
+}
+
+.discount-code {
+  background:#EEEEEE;
+}
+
+.checkout-btn {
+  background:#6C00FF;
+  color:white;
+  padding:0.5rem;
+
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -4,11 +4,47 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { useSelector, useDispatch } from "react-redux";
 import { initialState } from "./redux/slices/productSlice";
 import { addQuantity,removeQuantity,clearQuantity } from "./redux/slices/productSlice";
+import { useState,useEffect } from "react";
+import StripeCheckout from "react-stripe-checkout";
+import axios from "axios"
+
+
+
+const KEY = process.env.REACT_APP_STRIPE;
+
 
 function App() {
   const products = useSelector((state) => state.productState.products);
   const itemLength = products.length;
   const dispatch = useDispatch();
+  const [dicountCode,setDiscountCode] = useState("");
+  const [isPromo,setIsPromo] = useState(false);
+  const [discount,setDiscount] = useState(1);
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const onToken =(token) => {
+    setStripeToken(token);
+}
+
+
+  const handleChange = (e)=> {
+    setDiscountCode(e.target.value);
+    console.log(dicountCode)
+    if (e.target.value==="a")  {
+      setIsPromo(true)
+      setDiscount(0.5)
+
+    }
+    else if (e.target.value==="c"){
+      setIsPromo(true)
+      setDiscount(0.9)
+    }
+    else {
+      setIsPromo(false)
+    }
+  }
+
+  
 
   const totalprice = products.reduce((state,value) => {
     return state + value.price*value.quantity
@@ -16,23 +52,22 @@ function App() {
 
   return (
     <div className="App">
-      <div className="heading ">
-        <h2>Shopping cart</h2>
-      </div>
+      
 
-      <div className="container">
+      <div className="container " >
         <div className="row gap-5">
           <div className="col-12 col-md-7 ">
-            <div className="shadow-md p-4">
+            <div className="shadow-md p-4 shopping-cart">
               <h5
                 style={{
                   textAlign: "left",
-                  color: "grey",
                   marginBottom: "2rem",
+                  justifyContent:"space-between"
                 }}
               >
                 {" "}
-                Cart ({itemLength} items)
+                Shopping Cart <span style={{marginLeft:"1rem"}}>({itemLength} items)</span>
+                <hr/>
               </h5>
               
                 {products.map((product) => (
@@ -58,37 +93,34 @@ function App() {
 
                     <div
                       className="col-6"
-                      style={{ textAlign: "left", color: "grey" }}
+                      style={{ textAlign: "left",display:"flex",flexDirection:"column",justifyContent:"space-around"  }}
                     >
                       <h5 style={{ fontWeight: "bold" }}>{product.nama}</h5>
-                      <h6>SHIRT - {product.color}</h6>
-                      <h6>COLOR:{product.color}</h6>
-                      <h6>SIZE:{product.size}</h6>
+                      <h6>Category :  {product.category}</h6>
+                      <h6>Detail : <span></span>{product.detail}</h6>
                       <div className="row">
-                        <div className="col" style={{ fontSize: "12px",cursor:"pointer" }} 
+                        <div className="col" style={{ color: "grey",fontSize: "14px" }} 
                           onClick={() => dispatch(clearQuantity(product.id))}>
                           REMOVE ITEM
                         </div>
-                        <div className="col-7" style={{ fontSize: "12px"}}>
-                          MOVE TO WISH LIST
-                        </div>
+                        
                       </div>
                     </div>
 
                     <div className="col-3 ">
                       <div
-                        className="d-flex gap-3 align-center"
+                        className="d-flex align-center"
                         style={{
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                       >
-                        <button className="border pb-1 pt-1 pl-3 pr-3 " onClick={() =>  dispatch(removeQuantity(product.id))}>
+                        <button className=" pb-1 pt-1 pl-3 pr-3 " onClick={() =>  dispatch(removeQuantity(product.id))}>
                           -
                         </button>
-                        <p>{product.quantity}</p>
-                        <button className="border pb-1 pt-1 pl-3 pr-3 " onClick={() =>  dispatch(addQuantity(product.id))}>
+                        <button className="border pb-1 pt-1 pl-3 pr-3 ">{product.quantity}</button>
+                        <button className=" pb-1 pt-1 pl-3 pr-3 " onClick={() =>  dispatch(addQuantity(product.id))}>
                           +
                         </button>
                       </div>
@@ -100,7 +132,7 @@ function App() {
                           fontSize: "16px",
                         }}
                       >
-                        {product.price}
+                        Price : {product.price}
                       </p>
                     </div>
                   </div>
@@ -108,8 +140,8 @@ function App() {
             </div>
           </div>
 
-          <div className="col-12 col-md-4 ">
-            <div className="shadow-sm p-4">
+          <div className="col-12 col-md-4 mb-12">
+            <div className="shadow-sm p-4 order-summary ">
               <h5
                 style={{
                   textAlign: "left",
@@ -118,28 +150,44 @@ function App() {
                 }}
               >
                 {" "}
-                The total amount of
+                Order Summary
+                <hr/>
+
               </h5>
 
               <div style={{ borderBottom: "1px solid lightgrey" }}>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <h5 style={{ textAlign: "left", color: "grey" }}>
+                  <h6 style={{ textAlign: "left", color: "grey" }}>
                     Temporary amount
-                  </h5>
-                  <h5>{totalprice}</h5>
+                  </h6>
+                  <h6>{totalprice}</h6>
                 </div>
 
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    marginBottom: "1rem",
+                    margin:"0.5rem 0"
                   }}
                 >
-                  <h5 style={{ textAlign: "left", color: "grey" }}>Shipping</h5>
-                  <h5>Gratis</h5>
+                  <h6 style={{ textAlign: "left", color: "grey" }}>Shipping</h6>
+                  <h6>Free</h6>
+                </div>
+
+                <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "1rem",
+                  }}>
+                <h6 style={{ textAlign: "left", color: "grey", }}>Add a promo code</h6>
+                <select id="cars" name="cars" onChange={(e)=>handleChange(e)}>
+                  <option value="a">Stefanus123</option>
+                  <option value="b">FakeCode</option>
+                  <option value="c">Promo88</option>
+                  <option value="d">IDK</option>
+                </select>
                 </div>
               </div>
 
@@ -153,17 +201,31 @@ function App() {
                 <h6 style={{ textAlign: "left" }}>
                   The total amount of <br /> (including VAT)
                 </h6>
-                <h6>{totalprice}</h6>
+                <h6> {isPromo? discount*totalprice: totalprice}</h6>
               </div>
 
-              <button className="btn btn-primary mt-4 w-100">
+              {isPromo ?  <div class="alert alert-success mt-4" role="alert" style={{padding:"0.4rem"}}>
+                You Saved {` ${100 - discount*100}% `} 
+              </div>:""}
+
+              <StripeCheckout
+                  name='stefanus shop'
+                  image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTieHDSnSrZDDryW9nYmcIfZ28BHQsVmHvnF7GEOQ2YEQ&s'
+                  billingAddress
+                  shippingAddress
+                  description='Your total is $20'
+                  amount={2000}
+                  token={onToken}
+                  stripeKey={KEY}
+              >
+
+              <button className="checkout-btn mt-2 w-100">
                 GO TO CHECKOUT
               </button>
+              </StripeCheckout>
             </div>
 
-            <div className="shadow-sm mt-4 mb-4 p-4">
-              <h5 style={{ textAlign: "left" }}>add a discount code</h5>
-            </div>
+            
           </div>
         </div>
       </div>
