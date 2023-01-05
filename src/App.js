@@ -182,9 +182,9 @@ function App() {
                     marginBottom: "1rem",
                   }}>
                 <h6 style={{ textAlign: "left", color: "grey", }}>Add a promo code</h6>
-                <select id="cars" name="cars" onChange={(e)=>handleChange(e)}>
-                  <option value="a">Stefanus123</option>
+                <select name="select" onChange={(e)=>handleChange(e)}>
                   <option value="b">FakeCode</option>
+                  <option value="a">Stefanus123</option>
                   <option value="c">Promo88</option>
                   <option value="d">IDK</option>
                 </select>
