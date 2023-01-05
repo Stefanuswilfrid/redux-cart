@@ -213,8 +213,8 @@ function App() {
                   image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTieHDSnSrZDDryW9nYmcIfZ28BHQsVmHvnF7GEOQ2YEQ&s'
                   billingAddress
                   shippingAddress
-                  description='Your total is $20'
-                  amount={2000}
+                  description={`Your total is $${isPromo? discount*totalprice: totalprice}`}
+                  amount={(isPromo? discount*totalprice: totalprice)*1000 }
                   token={onToken}
                   stripeKey={KEY}
               >
