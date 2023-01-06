@@ -6,9 +6,9 @@ import { initialState } from "./redux/slices/productSlice";
 import { addQuantity,removeQuantity,clearQuantity } from "./redux/slices/productSlice";
 import { useState,useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import axios from "axios"
-
-
+import axios from "axios";
+import ModeNightIcon from '@mui/icons-material/ModeNight';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -21,6 +21,47 @@ function App() {
   const [isPromo,setIsPromo] = useState(false);
   const [discount,setDiscount] = useState(1);
   const [stripeToken, setStripeToken] = useState(null);
+  const [mode,setMode] = useState(true);
+
+  useEffect(() => {
+    const body = document.querySelector(".App");
+    const orderSummary = document.querySelector(".order-summary");
+    const orderLeftTexts = document.querySelectorAll(".order-left");
+    const shoppingCart = document.querySelector(".shopping-cart");
+    const shoppingLeftTexts = document.querySelectorAll(".text-cart");
+
+    if (!mode) {
+      body.classList.add("dark")
+      orderSummary.classList.add("dark")
+      // orderLeftText.classList.add("dark")
+      for (const o of orderLeftTexts) {
+        o.classList.add('dark');
+        
+      }
+      shoppingCart.classList.add("dark");
+
+      for (const s of shoppingLeftTexts) {
+        s.classList.add('dark');
+        
+      }
+
+    }
+    else {
+      body.classList.remove("dark")
+      orderSummary.classList.remove("dark")
+      // orderLeftText.classList.remove("dark")
+      for (const o of orderLeftTexts) {
+        o.classList.remove('dark');
+      }
+      shoppingCart.classList.remove("dark")
+
+      for (const s of shoppingLeftTexts) {
+        s.classList.remove('dark');
+        
+      }
+
+    }
+  },[mode])
 
   const onToken =(token) => {
     setStripeToken(token);
@@ -62,11 +103,14 @@ function App() {
                 style={{
                   textAlign: "left",
                   marginBottom: "2rem",
+                  display:"flex",
                   justifyContent:"space-between"
                 }}
               >
                 {" "}
-                Shopping Cart <span style={{marginLeft:"1rem"}}>({itemLength} items)</span>
+                <span>Shopping Cart <span style={{marginLeft:"1rem"}}>({itemLength} items)</span></span> 
+
+                <span style={{marginLeft:"auto"}}>{mode?<ModeNightIcon  style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>:<WbSunnyIcon style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>}</span>
                 <hr/>
               </h5>
               
@@ -99,7 +143,7 @@ function App() {
                       <h6>Category :  {product.category}</h6>
                       <h6>Detail : <span></span>{product.detail}</h6>
                       <div className="row">
-                        <div className="col" style={{ color: "grey",fontSize: "14px" }} 
+                        <div className="col text-cart" style={{ fontSize: "14px" }} 
                           onClick={() => dispatch(clearQuantity(product.id))}>
                           REMOVE ITEM
                         </div>
@@ -126,8 +170,8 @@ function App() {
                       </div>
 
                       <p
+                        className="text-cart"
                         style={{
-                          color: "grey",
                           marginTop: "4.5rem",
                           fontSize: "16px",
                         }}
@@ -145,7 +189,6 @@ function App() {
               <h5
                 style={{
                   textAlign: "left",
-                  color: "black",
                   marginBottom: "1rem",
                 }}
               >
@@ -159,7 +202,7 @@ function App() {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <h6 style={{ textAlign: "left", color: "grey" }}>
+                  <h6 className="order-left">
                     Temporary amount
                   </h6>
                   <h6>{totalprice}</h6>
@@ -172,8 +215,8 @@ function App() {
                     margin:"0.5rem 0"
                   }}
                 >
-                  <h6 style={{ textAlign: "left", color: "grey" }}>Shipping</h6>
-                  <h6>Free</h6>
+                  <h6 className="order-left">Shipping</h6>
+                  <h6 className="">Free</h6>
                 </div>
 
                 <div style={{
@@ -181,8 +224,8 @@ function App() {
                     justifyContent: "space-between",
                     marginBottom: "1rem",
                   }}>
-                <h6 style={{ textAlign: "left", color: "grey", }}>Add a promo code</h6>
-                <select name="select" onChange={(e)=>handleChange(e)}>
+                <h6 className="order-left">Add a promo code</h6>
+                <select name="select" onChange={(e)=>handleChange(e)} style={{color:"black"}}>
                   <option value="b">FakeCode</option>
                   <option value="a">Stefanus123</option>
                   <option value="c">Promo88</option>

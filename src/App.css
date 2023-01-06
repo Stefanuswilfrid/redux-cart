@@ -7,6 +7,15 @@
   min-height:100vh;
   place-items:center;
   background:#DDDDDD;
+  transition:1s;
+
+}
+
+.App.dark{
+  background:#404258;
+  transition:1s;
+
+
 }
 
 .App-logo {
@@ -15,23 +24,64 @@
 }
 
 .shopping-cart{
-  background:white;
+  background:white;  
+  transition:1s;
+}
+
+.shopping-cart.dark{
+  background:#50577A;
+  color:white;
+  transition:1s;
+
 }
 
 .order-summary {
   background:#EEEEEE;
 }
 
+.order-left{
+  color:grey;
+  text-align:left;
+  transition:1s;
+}
+
+.order-left.dark{
+  color:#EFEFEF;
+  transition:1s;
+}
+
+.order-summary.dark {
+  background:#474E68;
+  color:white;
+  transition:1s;
+
+}
+
+.text-cart{
+  color:grey;
+  transition:1s;
+
+}
+
+.text-cart.dark{
+  color:#EFEFEF;
+  transition:1s;
+
+}
+
+
 .discount-code {
   background:#EEEEEE;
 }
 
 .checkout-btn {
-  background:#6C00FF;
+  background:#6B728E;
   color:white;
   padding:0.5rem;
 
 }
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
