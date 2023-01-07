@@ -100,7 +100,7 @@ function App() {
                 {" "}
                 <span>Shopping Cart <span className="ml-4">({itemLength} items)</span></span> 
 
-                <span className="ml-auto">{mode?<ModeNightIcon  style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>:<WbSunnyIcon style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>}</span>
+                <span className="ml-auto">{mode?<ModeNightIcon className="cursor-pointer" onClick={()=>{setMode(!mode)}}/>:<WbSunnyIcon className="cursor-pointer" onClick={()=>{setMode(!mode)}}/>}</span>
                 <hr/>
               </h5>
               
@@ -148,14 +148,14 @@ function App() {
 
           <div className="col-12 col-md-4 mb-12">
             <div className="shadow-sm p-4 order-summary ">
-              <h5 className="text-left mb-8">
+              <h5 className="text-left mb-8 ">
                 {" "}
                 Order Summary
                 <hr/>
 
               </h5>
 
-              <div style={{ borderBottom: "1px solid lightgrey" }}>
+              <div  >
                 <div className="d-flex justify-between">
                   <h6 className="order-left">
                     Temporary amount
@@ -177,6 +177,8 @@ function App() {
                   <option value="d">IDK</option>
                 </select>
                 </div>
+
+                <hr/>
               </div>
 
               <div className="order-content mt-4">
