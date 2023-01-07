@@ -120,10 +120,9 @@ function App() {
                 }}>
                     <div className="col-3">
                       <div
-                        className="shadow-md"
+                        className="shadow-md image-wrapper"
                         style={{
                           backgroundColor: "lightgrey",
-                          height: "100%",
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
@@ -131,7 +130,7 @@ function App() {
                           borderRadius: "0.5rem",
                         }}
                       >
-                        <img src={product.img} width={"200px"} alt="" />
+                        <img className="product-img" src={product.img}  alt="" />
                       </div>
                     </div>
 
