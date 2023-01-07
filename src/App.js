@@ -97,7 +97,7 @@ function App() {
 
       <div className="container " >
         <div className="row gap-5">
-          <div className="col-12 col-md-7 ">
+          <div className="col-12 col-md-7 shopping-cart-wrapper">
             <div className="shadow-md p-4 shopping-cart">
               <h5
                 style={{
