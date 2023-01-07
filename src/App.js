@@ -112,7 +112,8 @@ function App() {
                       </div>
                     </div>
 
-                    <div className="col-6 text-left d-flex flex-col justify-around">
+                    <div className="col-6 text-left d-flex flex-col justify-around"
+>
                       <h5 className="fw-bold">{product.nama}</h5>
                       <h6>Category :  {product.category}</h6>
                       <h6>Detail : <span></span>{product.detail}</h6>
@@ -136,13 +137,7 @@ function App() {
                         </button>
                       </div>
 
-                      <p
-                        className="text-cart"
-                        style={{
-                          marginTop: "4.5rem",
-                          fontSize: "16px",
-                        }}
-                      >
+                      <p className="text-cart price">
                         Price : {product.price}
                       </p>
                     </div>
