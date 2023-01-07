@@ -35,6 +35,13 @@
 
 }
 
+.shopping-cart>h5{
+  textAlign:left;
+  margin-bottom: 2rem;
+  display:flex;
+  justify-content:space-between;
+}
+
 .order-summary {
   background:#EEEEEE;
 }
@@ -81,12 +88,29 @@
 
 }
 
+.shopping-cart>h5{
+  text-align: left;
+  margin-bottom:2rem;
+  display:flex;
+  justify-content:space-between;
+}
 .image-wrapper{
   height:100%;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:0.3rem;
+  border-radius:0.5rem;
 }
 
 .product-img{
   width:200px;
+}
+
+.order-content{
+  display:flex;
+  justify-content:space-between;
 }
 
 @media only screen and (max-width: 738px) {
