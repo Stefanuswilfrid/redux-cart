@@ -81,13 +81,48 @@
 
 }
 
+.image-wrapper{
+  height:100%;
+}
 
+.product-img{
+  width:200px;
+}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media only screen and (max-width: 738px) {
+  .image-wrapper{
+    height:60%;
+  }
+
+  .product-img{
+    width:100%;
+    height:60%;
   }
 }
+
+
+@media only screen and (min-width: 768px) {
+  .container{
+    max-width:820px !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .container{
+    max-width:960px !important;
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+  .container{
+    max-width:1140px !important;
+  }
+}
+
+
+
+
+
 
 .App-header {
   background-color: #282c34;
@@ -104,11 +139,3 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
