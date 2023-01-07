@@ -85,8 +85,6 @@ function App() {
     }
   }
 
-  
-
   const totalprice = products.reduce((state,value) => {
     return state + value.price*value.quantity
   },0)
@@ -94,51 +92,28 @@ function App() {
   return (
     <div className="App">
       
-
       <div className="container " >
         <div className="row gap-5">
           <div className="col-12 col-md-7 shopping-cart-wrapper">
             <div className="shadow-md p-4 shopping-cart">
-              <h5
-                style={{
-                  textAlign: "left",
-                  marginBottom: "2rem",
-                  display:"flex",
-                  justifyContent:"space-between"
-                }}
-              >
+              <h5>
                 {" "}
-                <span>Shopping Cart <span style={{marginLeft:"1rem"}}>({itemLength} items)</span></span> 
+                <span>Shopping Cart <span className="ml-4">({itemLength} items)</span></span> 
 
-                <span style={{marginLeft:"auto"}}>{mode?<ModeNightIcon  style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>:<WbSunnyIcon style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>}</span>
+                <span className="ml-auto">{mode?<ModeNightIcon  style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>:<WbSunnyIcon style={{cursor:"pointer"}} onClick={()=>{setMode(!mode)}}/>}</span>
                 <hr/>
               </h5>
               
                 {products.map((product) => (
-                  <div key={product.id} className="row" style={{
-                  paddingBottom: "2rem",
-                }}>
+                  <div key={product.id} className="row pb-8">
                     <div className="col-3">
-                      <div
-                        className="shadow-md image-wrapper"
-                        style={{
-                          backgroundColor: "lightgrey",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          padding: "0.3rem",
-                          borderRadius: "0.5rem",
-                        }}
-                      >
+                      <div className="shadow-md image-wrapper">
                         <img className="product-img" src={product.img}  alt="" />
                       </div>
                     </div>
 
-                    <div
-                      className="col-6"
-                      style={{ textAlign: "left",display:"flex",flexDirection:"column",justifyContent:"space-around"  }}
-                    >
-                      <h5 style={{ fontWeight: "bold" }}>{product.nama}</h5>
+                    <div className="col-6 text-left d-flex flex-col justify-around">
+                      <h5 className="fw-bold">{product.nama}</h5>
                       <h6>Category :  {product.category}</h6>
                       <h6>Detail : <span></span>{product.detail}</h6>
                       <div className="row">
@@ -151,14 +126,7 @@ function App() {
                     </div>
 
                     <div className="col-3 ">
-                      <div
-                        className="d-flex align-center"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
+                      <div className="d-flex align-center justify-center">
                         <button className=" pb-1 pt-1 pl-3 pr-3 " onClick={() =>  dispatch(removeQuantity(product.id))}>
                           -
                         </button>
@@ -185,12 +153,7 @@ function App() {
 
           <div className="col-12 col-md-4 mb-12">
             <div className="shadow-sm p-4 order-summary ">
-              <h5
-                style={{
-                  textAlign: "left",
-                  marginBottom: "1rem",
-                }}
-              >
+              <h5 className="text-left mb-8">
                 {" "}
                 Order Summary
                 <hr/>
@@ -198,31 +161,19 @@ function App() {
               </h5>
 
               <div style={{ borderBottom: "1px solid lightgrey" }}>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
+                <div className="d-flex justify-between">
                   <h6 className="order-left">
                     Temporary amount
                   </h6>
                   <h6>{totalprice}</h6>
                 </div>
 
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    margin:"0.5rem 0"
-                  }}
-                >
+                <div className="d-flex justify-between my-2">
                   <h6 className="order-left">Shipping</h6>
                   <h6 className="">Free</h6>
                 </div>
 
-                <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: "1rem",
-                  }}>
+                <div className="order-content mb-4">
                 <h6 className="order-left">Add a promo code</h6>
                 <select name="select" onChange={(e)=>handleChange(e)} style={{color:"black"}}>
                   <option value="b">FakeCode</option>
@@ -233,20 +184,14 @@ function App() {
                 </div>
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "1rem",
-                }}
-              >
-                <h6 style={{ textAlign: "left" }}>
+              <div className="order-content mt-4">
+                <h6 className="text-left">
                   The total amount of <br /> (including VAT)
                 </h6>
                 <h6> {isPromo? discount*totalprice: totalprice}</h6>
               </div>
 
-              {isPromo ?  <div class="alert alert-success mt-4" role="alert" style={{padding:"0.4rem"}}>
+              {isPromo ?  <div class="alert alert-success mt-4 p-2" role="alert" >
                 You Saved {` ${100 - discount*100}% `} 
               </div>:""}
 
