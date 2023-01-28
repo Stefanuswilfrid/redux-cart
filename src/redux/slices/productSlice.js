@@ -20,7 +20,8 @@ export  const initialState = {
             "category":"Clothing",
             "detail":"Size S",
             "price":30,
-        }
+        },
+        
     ],
 }
 // initialState.products[0].nama
