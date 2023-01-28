@@ -9,6 +9,10 @@ import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+
+import song from "./music/omaewa.mp3";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -22,6 +26,7 @@ function App() {
   const [discount,setDiscount] = useState(1);
   const [stripeToken, setStripeToken] = useState(null);
   const [mode,setMode] = useState(true);
+  const [isPlayed,setIsPlayed] = useState(false)
 
   useEffect(() => {
     const body = document.querySelector(".App");
@@ -67,6 +72,17 @@ function App() {
     setStripeToken(token);
 }
 
+const music = new Audio(song)
+
+function playVolume(){
+  music.play()
+}
+
+function pause(){
+  music.pause()
+}
+
+
 
   const handleChange = (e)=> {
     setDiscountCode(e.target.value);
@@ -97,8 +113,10 @@ function App() {
           <div className="col-12 col-md-7 shopping-cart-wrapper">
             <div className="shadow-md p-4 shopping-cart">
               <h5>
-                {" "}
-                <span>Shopping Cart <span className="ml-4">({itemLength} items)</span></span> 
+              <VolumeUpIcon className="cursor-pointer" onClick={()=>{playVolume()}}/> 
+                
+              <span className="ml-2" >
+               Shopping Cart <span className="ml-4">({itemLength} items) </span></span> 
 
                 <span className="ml-auto">{mode?<ModeNightIcon className="cursor-pointer" onClick={()=>{setMode(!mode)}}/>:<WbSunnyIcon className="cursor-pointer" onClick={()=>{setMode(!mode)}}/>}</span>
                 <hr/>
