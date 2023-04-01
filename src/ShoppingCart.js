@@ -85,7 +85,7 @@ export default function ShoppingCart({ mode, setMode, handlePlay,handlePause }) 
               </h6>
               <div className="row">
                 <div
-                  className="col text-cart"
+                  className="col text-cart cursor-pointer"
                   style={{ fontSize: "14px" }}
                   onClick={() => dispatch(clearQuantity(product.id))}
                 >
