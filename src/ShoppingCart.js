@@ -12,38 +12,15 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 
-export default function ShoppingCart({ mode, setMode, handlePlay,handlePause }) {
+export default function ShoppingCart({ mode, setMode, handleBeep,handleClick }) {
   const products = useSelector((state) => state.productState.products);
   const itemLength = products.length;
   const dispatch = useDispatch();
-  const [isPlay,setIsPlay] = useState(false);
 
   return (
     <div className="col-12 col-md-7 shopping-cart-wrapper">
       <div className="shadow-md p-4 shopping-cart">
         <h5>
-        {!isPlay && 
-          <VolumeUpIcon
-            className="cursor-pointer"
-            onClick={() => {
-              handlePlay();
-              setIsPlay(!isPlay);
-            }}
-          />
-        }
-          {isPlay && 
-            <VolumeOffIcon 
-              className="cursor-pointer"
-
-              onClick={() => {
-              handlePause();
-              setIsPlay(!isPlay);
-            }}
-            /> 
-          }
-
-          
-
           <span className="ml-2">
             Shopping Cart <span className="ml-4">({itemLength} items) </span>
           </span>
@@ -54,12 +31,15 @@ export default function ShoppingCart({ mode, setMode, handlePlay,handlePause }) 
                 className="cursor-pointer"
                 onClick={() => {
                   setMode(!mode);
+                  handleBeep();
+
                 }}
               />
             ) : (
               <WbSunnyIcon
                 className="cursor-pointer"
                 onClick={() => {
+                  handleClick();
                   setMode(!mode);
                 }}
               />
